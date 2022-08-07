@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import PromouteMarketApp, PoliticMarketApp, SearchMarketApp, BasketMarketApp, DetailMarketApp
+from .views import PromoteMarketApp, PoliticMarketApp, SearchMarketApp, BasketMarketApp, DetailMarketApp
 
 urlpatterns = [
-    path('', PromouteMarketApp.as_view(), name='promout'),
+    path('', PromoteMarketApp.as_view(), name='promout'),
     path('politics/', PoliticMarketApp.as_view(), name='politics'),
     path('search/<slug:slug>/', SearchMarketApp.as_view(), name='search'),
     path('basket/', BasketMarketApp.as_view(), name='basket'),

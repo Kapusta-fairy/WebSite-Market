@@ -1,18 +1,25 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Products(models.Model):
     name = models.CharField(max_length=20, verbose_name='name')
     slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="slug")
+    description = models.CharField(max_length=600, verbose_name='name')
+    photo = models.ImageField(upload_to='products/', verbose_name='photo')
     color = models.ForeignKey('Color', on_delete=models.PROTECT, verbose_name='color')
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='category')
     article = models.CharField(max_length=20, verbose_name='article')
     price = models.IntegerField(verbose_name='price')
     discount = models.IntegerField(verbose_name='discount')
+    currency_char = models.ForeignKey('Currency', on_delete=models.PROTECT, verbose_name='currency')
     total_purchased = models.CharField(max_length=20, verbose_name='total purchased')
 
     def __str__(self):
         return f'{self.name}art{self.article}'
+
+    def get_absolute_url(self):
+        return reverse('promoute_view', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'товар'
@@ -20,20 +27,35 @@ class Products(models.Model):
         ordering = ['name']
 
 
+class Currency(models.Model):
+    char = models.CharField(max_length=1, verbose_name='currency char')
+
+    def __str__(self):
+        return self.char
+
+    class Meta:
+        verbose_name = 'валюта'
+        verbose_name_plural = 'валюты'
+        ordering = ['char']
+
+
 class Categories(models.Model):
-    name = models.CharField(max_length=20, verbose_name='name')
+    title = models.CharField(max_length=20, verbose_name='name')
     slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="slug")
 
     def __str__(self):
-        return self.name
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('сategories_view', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-        ordering = ['name']
+        ordering = ['title']
 
 
-class Reviews(models.Model):
+class Review(models.Model):
     product = models.ForeignKey('products', on_delete=models.PROTECT, verbose_name='product')
     author = models.CharField(max_length=20, verbose_name='name')
     text_content = models.CharField(max_length=20, verbose_name='text content')
@@ -70,19 +92,19 @@ class Basket(models.Model):
     class Meta:
         verbose_name = 'корзина'
         verbose_name_plural = 'корзины'
-        ordering = ['product_name']
+        ordering = ['product']
 
 
 class Color(models.Model):
-    name = models.CharField(max_length=20, verbose_name='name')
+    title = models.CharField(max_length=20, verbose_name='name')
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = 'цвет'
         verbose_name_plural = 'цвета'
-        ordering = ['name']
+        ordering = ['title']
 
 
 class Delivery(models.Model):

@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
+{{ Title }}
 {% endblock %}
 
 {% block content %}
-
-<h1>ыыы</h1>
-
+<div class="btn-group" role="group" aria-label="Basic">
+    {% for item in object_list%}
+    <div class="card" style="width: 18rem;">
+      <a href="detail/{{ item.slug }}"><img src="{{ item.photo.url }}" class="card-img-top" alt="" width=""></a>
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <h5 class="card-title">{{ item.price }}{{ item.currency_char }}</h5>
+      </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
