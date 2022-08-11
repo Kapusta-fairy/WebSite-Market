@@ -116,7 +116,3 @@ class Payment(models.Model):
         verbose_name = 'оплата'
         verbose_name_plural = 'способы оплаты'
         ordering = ['title']
-
-
-class CartInfo(models.Model):
-    pass

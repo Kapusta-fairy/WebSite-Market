@@ -15,11 +15,7 @@ def cart_add(request, id):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    context = {
-        'cart': cart,
-        'title': 'корзина'
-    }
-    return render(request, template_name='cart/detail.html', context=context)
+    return render(request, 'cart/detail.html', {'cart': cart, 'title': 'корзина'})
 
 
 def cart_remove(request, product_id):

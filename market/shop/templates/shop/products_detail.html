@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ object.name }}
+{{ product.name }}
 {% endblock %}
 
 {% block content %}
@@ -10,34 +10,34 @@
     <div class="col-md-12">
         <div class="row row-cols-md-3">
             <div class="col">
-                <img src="{{ object.photo.url }}" class="card-img-top" alt="" width="">
+                <img src="{{ product.photo.url }}" class="card-img-top" alt="" width="">
             </div>
             <div>
-                <h3>{{ object.name }}</h3>
-                <p>art: {{ object.article }}</p>
-                <h5>{{ object.price }}{{ object.currency_char }}</h5>
-                <p>{{ object.description }}</p>
+                <h3>{{ product.name }}</h3>
+                <p>art: {{ product.article }}</p>
+                <h5>{{ product.price }}{{ product.currency_char }}</h5>
+                <p>{{ product.description }}</p>
             </div>
             <div class="col">
                 <table class="table">
                     <tbody>
                         <tr>
                             <th scope="row">Категория</th>
-                            <td>{{ object.category }}</td>
+                            <td>{{ product.category }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Цвет</th>
-                            <td>{{ object.color }}</td>
+                            <td>{{ product.color }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Всего продано</th>
-                            <td>{{ object.total_purchased }}</td>
+                            <td>{{ product.total_purchased }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div>
-                <form action="{% url 'cart_add' object.id %}" method="post">
+                <form action="{% url 'cart_add' product.id %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-light">Добавить в корзину</button>

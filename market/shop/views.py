@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
+from shop.forms import CartAddProductForm
 from shop.models import Products, Politics
 
 
-class PromoteMarketApp(ListView):
+class PromoteShop(ListView):
     """показывает самые популярные товары"""
     model = Products
 
@@ -13,14 +14,16 @@ class PromoteMarketApp(ListView):
         return context
 
 
-def detail_product(request):
-    model = Products.all
-    context = {
-        'cart': cart,
-        'title': 'корзина'
-    }
-    return render(request, template_name='cart/detail.html', context=context)
+class DetailShop(DetailView):
+    model = Products
 
 
-class PoliticMarketApp(DetailView):
+def product_detail(request, slug):
+    product = get_object_or_404(Products,
+                                slug=slug)
+    form = CartAddProductForm()
+    return render(request, 'shop/products_detail.html', {'product': product, 'form': form})
+
+
+class PoliticShop(DetailView):
     model = Politics
