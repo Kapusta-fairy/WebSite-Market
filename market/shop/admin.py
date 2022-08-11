@@ -5,7 +5,12 @@ from .models import Products, Categories, Review, Politics, Color, Delivery, Pay
 class ProductsAdmin(admin.ModelAdmin):
     list_display = ('article', 'name', 'total_purchased')
     list_display_links = ('article',)
+    prepopulated_fields = {'slug': ('name',), 'article': ('color', 'category', 'currency_char')}
     search_fields = ('article', 'name')
+
+
+class CategoriesAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class ReviewAdmin(admin.ModelAdmin):

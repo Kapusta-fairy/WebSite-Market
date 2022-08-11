@@ -5,13 +5,13 @@ from django.urls import reverse
 class Products(models.Model):
     name = models.CharField(max_length=20, verbose_name='name')
     slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="slug")
-    description = models.CharField(max_length=600, verbose_name='name')
+    description = models.TextField(max_length=600, verbose_name='description')
     photo = models.ImageField(upload_to='products/', verbose_name='photo')
     color = models.ForeignKey('Color', on_delete=models.PROTECT, verbose_name='color')
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='category')
     article = models.CharField(max_length=20, verbose_name='article')
     price = models.IntegerField(verbose_name='price')
-    discount = models.IntegerField(verbose_name='discount')
+    discount = models.IntegerField(verbose_name='discount', blank=True, null=True)
     currency_char = models.ForeignKey('Currency', on_delete=models.PROTECT, verbose_name='currency')
     total_purchased = models.CharField(max_length=20, verbose_name='total purchased')
 
@@ -19,7 +19,7 @@ class Products(models.Model):
         return f'{self.name}art{self.article}'
 
     def get_absolute_url(self):
-        return reverse('promoute_view', kwargs={'slug': self.slug})
+        return reverse('promout', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'товар'
@@ -45,9 +45,6 @@ class Categories(models.Model):
 
     def __str__(self):
         return self.title
-
-    def get_absolute_url(self):
-        return reverse('сategories_view', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'категория'
@@ -81,18 +78,6 @@ class Politics(models.Model):
         verbose_name = 'политика'
         verbose_name_plural = 'политики'
         ordering = ['title']
-
-
-class Basket(models.Model):
-    product = models.ForeignKey('products', on_delete=models.PROTECT, verbose_name='product')
-
-    def __str__(self):
-        return self.product
-
-    class Meta:
-        verbose_name = 'корзина'
-        verbose_name_plural = 'корзины'
-        ordering = ['product']
 
 
 class Color(models.Model):
@@ -133,9 +118,5 @@ class Payment(models.Model):
         ordering = ['title']
 
 
-class Search(models.Model):
-    pass
-
-
-class Detail(models.Model):
+class CartInfo(models.Model):
     pass

@@ -1,5 +1,6 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from market_app.models import Products, Politics, Search, Basket, Detail
+from shop.models import Products, Politics
 
 
 class PromoteMarketApp(ListView):
@@ -12,17 +13,14 @@ class PromoteMarketApp(ListView):
         return context
 
 
+def detail_product(request):
+    model = Products.all
+    context = {
+        'cart': cart,
+        'title': 'корзина'
+    }
+    return render(request, template_name='cart/detail.html', context=context)
+
+
 class PoliticMarketApp(DetailView):
     model = Politics
-
-
-class SearchMarketApp(ListView):
-    model = Search
-
-
-class BasketMarketApp(ListView):
-    model = Basket
-
-
-class DetailMarketApp(DetailView):
-    model = Detail

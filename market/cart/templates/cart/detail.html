@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Корзина
+{% endblock %}
+
+{% block content %}
+<div>
+    {% for item in cart %}
+        {{ item.product.image.url }}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Цвет</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Итого</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ item.products.name }}</td>
+                </tr>
+                <tr>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                <tr>
+                    <td>{{ item.price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ item.total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+    <p class="text-right">
+        <a href="{% url 'promout' %}" class="button light">Продолжить</a>
+        <a href="#" class="button">Купить</a>
+    </p>
+</div>
+{% endblock %}
