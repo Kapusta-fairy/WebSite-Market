@@ -19,8 +19,7 @@ class DetailShop(DetailView):
 
 
 def product_detail(request, slug):
-    product = get_object_or_404(Products,
-                                slug=slug)
+    product = get_object_or_404(Products, slug=slug)
     form = CartAddProductForm()
     return render(request, 'shop/products_detail.html', {'product': product, 'form': form})
 

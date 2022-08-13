@@ -1,43 +1,55 @@
 {% extends "base.html" %}
 
+{% load cart_teg %}
+
 {% load static %}
 
 {% block title %}
-Корзина
+{{ Title }}
 {% endblock %}
 
 {% block content %}
 <div>
-    {% for item in cart %}
-        {{ item.product.image.url }}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Категория</th>
-                    <th scope="col">Цвет</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Итого</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ item.products.name }}</td>
-                </tr>
-                <tr>
-                    <td>{{ item.quantity }}</td>
-                </tr>
-                <tr>
-                    <td>{{ item.price }}</td>
-                </tr>
-                <tr>
-                    <td>{{ item.total_price }}</td>
-                </tr>
-            </tbody>
-        </table>
-    {% endfor %}
-    <p class="text-right">
-        <a href="{% url 'promout' %}" class="button light">Продолжить</a>
-        <a href="#" class="button">Купить</a>
-    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Товар</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Итого</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            <tr>
+                <td>
+                    <a href="{% url 'detail' item.slug %}">
+                        <img src="{% get_product_photo item %}" alt="" width="120">
+                    </a>
+                </td>
+                <td>
+                    {% get_product_name item %}
+                </td>
+                <td>
+                    <a href="{% url 'cart_add' item.product_id %}">Добавить</a>
+                </td>
+                <td>
+                    <a href="remove/{% get_product_name item %}">Удалить</a>
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.total_price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{% url 'promout' %}" type="button" class="btn btn-light">Продолжить</a>
+        <a href="#" type="button" class="btn btn-light">Купить</a>
+    </div>
 </div>
 {% endblock %}
