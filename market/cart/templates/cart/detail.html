@@ -15,8 +15,6 @@
             <tr>
                 <th scope="col">Товар</th>
                 <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
                 <th scope="col">Кол-во</th>
                 <th scope="col">Цена</th>
                 <th scope="col">Итого</th>
@@ -32,24 +30,20 @@
                 </td>
                 <td>
                     {% get_product_name item %}
+                    <a class="btn btn-light" href="{% url 'cart_remove' item.product_id %}">Удалить</a>
                 </td>
                 <td>
-                    <a href="{% url 'cart_add' item.product_id %}">Добавить</a>
+                    {{ item.quantity }}
                 </td>
-                <td>
-                    <a href="remove/{% get_product_name item %}">Удалить</a>
-                </td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.total_price }}</td>
+                <td>{{ item.price }}{{ currency }}</td>
+                <td>{{ item.total_price }}{{ currency }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
     <div class="btn-group" role="group" aria-label="Basic example">
         <a href="{% url 'promout' %}" type="button" class="btn btn-light">Продолжить</a>
-        <a href="#" type="button" class="btn btn-light">Купить</a>
+        <a href="#" type="button" class="btn btn-light">Купить {{ total }}{{ currency }}</a>
     </div>
 </div>
 {% endblock %}

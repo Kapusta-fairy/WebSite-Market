@@ -24,4 +24,7 @@ def cart_remove(request, id):
 
 
 def cart_detail(request):
-    return render(request, 'cart/detail.html', {'cart': Cart(request)})
+    context = {'cart': Cart(request),
+               'total': Cart(request).get_total_price(),
+               'currency': '₽'}
+    return render(request, 'cart/detail.html', context)
