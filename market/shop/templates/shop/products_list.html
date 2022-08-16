@@ -5,15 +5,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="btn-group" role="group" aria-label="Basic">
-    {% for item in object_list%}
-    <div class="card" style="width: 18rem;">
-      <a href="detail/{{ item.slug }}"><img src="{{ item.photo.url }}" class="card-img-top" alt="" width=""></a>
-      <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <h5 class="card-title">{{ item.price }}{{ item.currency_char }}</h5>
-      </div>
+<div class="row">
+    <div class="col-md-3">
+        {% include 'inc/_categories.html' %}
     </div>
-    {% endfor %}
+    <div class="col-md-9">
+        <div class="row row-cols-md-3">
+            {% for item in object_list %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <a href="{% url 'detail' item.slug %}">
+                        <img src="{{ item.photo.url }}" class="card-img-top" alt="" height="225"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <h5 class="card-title">{{ item.price }}{{ item.currency_char }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

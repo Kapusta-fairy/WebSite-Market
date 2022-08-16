@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Products, Categories, Review, Politics, Color, Delivery, Payment, Currency
+from .models import Products, Categories, Review, Color, Currency
 
 
 class ProductsAdmin(admin.ModelAdmin):
@@ -10,6 +10,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
 
 class CategoriesAdmin(admin.ModelAdmin):
+    list_display_links = ('title',)
     prepopulated_fields = {'slug': ('title',)}
 
 
@@ -26,9 +27,6 @@ class OtherAdmin(admin.ModelAdmin):
 admin.site.register(Products, ProductsAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Categories)
-admin.site.register(Politics)
 admin.site.register(Color)
-admin.site.register(Delivery)
-admin.site.register(Payment)
 admin.site.register(Currency)
 admin.site.site_header = 'Управление'

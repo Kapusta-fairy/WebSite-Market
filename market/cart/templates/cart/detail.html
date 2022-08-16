@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% load cart_teg %}
+{% load cart_tegs %}
 
 {% load static %}
 
 {% block title %}
-{{ Title }}
+{{ title }}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
             <tr>
                 <td>
                     <a href="{% url 'detail' item.slug %}">
-                        <img src="{% get_product_photo item %}" alt="" width="120">
+                        <img src="{% get_product_photo item %}" alt="" height="100" width="120">
                     </a>
                 </td>
                 <td>
@@ -43,7 +43,12 @@
     </table>
     <div class="btn-group" role="group" aria-label="Basic example">
         <a href="{% url 'promout' %}" type="button" class="btn btn-light">Продолжить</a>
-        <a href="#" type="button" class="btn btn-light">Купить {{ total }}{{ currency }}</a>
+        <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
     </div>
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="#" type="button" class="btn btn-light">Купить {{ total }}{{ currency }}</a>
+    </form>
 </div>
 {% endblock %}

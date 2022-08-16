@@ -40,7 +40,8 @@ class Currency(models.Model):
 
 
 class Categories(models.Model):
-    title = models.CharField(max_length=20, verbose_name='name')
+    objects = None
+    title = models.CharField(max_length=20, verbose_name='title')
     slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="slug")
 
     def __str__(self):
@@ -67,19 +68,6 @@ class Review(models.Model):
         ordering = ['author']
 
 
-class Politics(models.Model):
-    title = models.CharField(max_length=20, verbose_name='title')
-    content = models.CharField(max_length=20, verbose_name='content')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'политика'
-        verbose_name_plural = 'политики'
-        ordering = ['title']
-
-
 class Color(models.Model):
     title = models.CharField(max_length=20, verbose_name='name')
 
@@ -89,30 +77,4 @@ class Color(models.Model):
     class Meta:
         verbose_name = 'цвет'
         verbose_name_plural = 'цвета'
-        ordering = ['title']
-
-
-class Delivery(models.Model):
-    title = models.CharField(max_length=20, verbose_name='title')
-    description = models.CharField(max_length=20, verbose_name='description')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'доставка'
-        verbose_name_plural = 'способы доставки'
-        ordering = ['title']
-
-
-class Payment(models.Model):
-    title = models.CharField(max_length=20, verbose_name='title')
-    description = models.CharField(max_length=20, verbose_name='description')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'оплата'
-        verbose_name_plural = 'способы оплаты'
         ordering = ['title']
