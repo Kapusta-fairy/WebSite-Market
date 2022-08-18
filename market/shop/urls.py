@@ -6,5 +6,6 @@ urlpatterns = [
     path('', PromoteShop.as_view(), name='promout'),
     path('detail/<slug:slug>/', views.product_detail, name='detail'),
     path('category/<slug:slug>/', CategoryShop.as_view(), name='category'),
-    path('search/', SearchShop.as_view(), name='search')
+    path('search/', SearchShop.as_view(), name='search'),
+    path('plug/', views.pay_plug, name='plug')
 ]

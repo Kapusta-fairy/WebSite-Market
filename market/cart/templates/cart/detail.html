@@ -10,45 +10,49 @@
 
 {% block content %}
 <div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Товар</th>
-                <th scope="col"></th>
-                <th scope="col">Кол-во</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Итого</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in cart %}
-            <tr>
-                <td>
-                    <a href="{% url 'detail' item.slug %}">
-                        <img src="{% get_product_photo item %}" alt="" height="100" width="120">
-                    </a>
-                </td>
-                <td>
-                    {% get_product_name item %}
-                    <a class="btn btn-light" href="{% url 'cart_remove' item.product_id %}">Удалить</a>
-                </td>
-                <td>
-                    {{ item.quantity }}
-                </td>
-                <td>{{ item.price }}{{ currency }}</td>
-                <td>{{ item.total_price }}{{ currency }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="{% url 'promout' %}" type="button" class="btn btn-light">Продолжить</a>
-        <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
-    </div>
-    <form action="#" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <a href="#" type="button" class="btn btn-light">Купить {{ total }}{{ currency }}</a>
-    </form>
+    {% if cart %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Товар</th>
+                    <th scope="col"></th>
+                    <th scope="col">Кол-во</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Итого</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                <tr>
+                    <td>
+                        <a href="{% url 'detail' item.slug %}">
+                            <img src="{% get_product_photo item %}" alt="" height="100" width="120">
+                        </a>
+                    </td>
+                    <td>
+                        {% get_product_name item %}
+                        <a class="btn btn-light" href="{% url 'cart_remove' item.product_id %}">Удалить</a>
+                    </td>
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+                    <td>{{ item.price }}{{ currency }}</td>
+                    <td>{{ item.total_price }}{{ currency }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'promout' %}" type="button" class="btn btn-light">Вернуться на главную</a>
+            <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
+        </div>
+        <form action="{% url 'plug' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-light">Купить {{ total }}{{ currency }}</button>
+        </form>
+    {% else %}
+        <h5>Кажется тут пусто...</h5>
+    {% endif %}
 </div>
 {% endblock %}

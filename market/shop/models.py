@@ -13,7 +13,7 @@ class Products(models.Model):
     price = models.IntegerField(verbose_name='price')
     discount = models.IntegerField(verbose_name='discount', blank=True, null=True)
     currency_char = models.ForeignKey('Currency', on_delete=models.PROTECT, verbose_name='currency')
-    total_purchased = models.CharField(max_length=20, verbose_name='total purchased')
+    total_purchased = models.IntegerField(verbose_name='total purchased')
 
     def __str__(self):
         return f'{self.name}art{self.article}'

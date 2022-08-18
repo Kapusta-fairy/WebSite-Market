@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from shop.forms import CartAddProductForm
@@ -45,3 +46,7 @@ def product_detail(request, slug):
     product = get_object_or_404(Products, slug=slug)
     form = CartAddProductForm()
     return render(request, 'shop/products_detail.html', {'product': product, 'form': form})
+
+
+def pay_plug(request):
+    return HttpResponse('а, ну тут типа форма оплаты от банка, вот')

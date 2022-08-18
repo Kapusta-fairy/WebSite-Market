@@ -15,7 +15,13 @@
             <div>
                 <h3>{{ product.name }}</h3>
                 <p>art: {{ product.article }}</p>
-                <h5>{{ product.price }}{{ product.currency_char }}</h5>
+                {% if product.discount %}
+                    <h5>Скидка!</h5><br>
+                    <h4>было {{ product.price }}{{ product.currency_char }}</h4>
+                    <h4>стало {{ product.discount }}{{ product.currency_char }}</h4>
+                {% else %}
+                    <h5>{{ product.price }}{{ product.currency_char }}</h5>
+                {% endif %}
                 <p>{{ product.description }}</p>
             </div>
             <div class="col">
