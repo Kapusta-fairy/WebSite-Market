@@ -1,5 +1,5 @@
 from django import forms
-from shop.models import Products, Review
+from shop.models import Products
 from market.settings import PRODUCT_QUANTITY_CHOICES
 
 
@@ -20,16 +20,3 @@ class CartAddProductForm(forms.Form):
                                       widget=forms.Select(attrs={'class': 'form-control'}),
                                       label='Количество')
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
-
-
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model = Review
-        fields = ['text_content']
-        widgets = {'text_content': forms.Textarea(attrs={'class': 'form-control'})}
-
-    def __init__(self, user, product, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.instance.product = product
-        if user and user.is_authenticated:
-            self.instance.author = user

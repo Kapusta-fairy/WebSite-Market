@@ -8,7 +8,6 @@ from pathlib import Path
 
 from market.private_settings import market_db, secret_key, debug
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = secret_key
@@ -26,6 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'register.apps.RegisterConfig',
+    'review.apps.ReviewConfig',
 ]
 
 MIDDLEWARE = [

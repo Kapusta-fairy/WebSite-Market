@@ -40,8 +40,8 @@
                     </tr>
                     </tbody>
                 </table>
-                {% if user.is_authenticated %}
-                <form id='review_form' action="{% url 'detail' product.slug %}" method="post">
+                {% if request.user.is_authenticated %}
+                <form id='review_form' action="{% url 'review_add' product.slug %}" method="post">
                     {% csrf_token %}
                     {{ review_form.as_p }}
                     <button type="submit" class="btn btn-light">Оставить отзыв</button>

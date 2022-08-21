@@ -54,6 +54,18 @@ class Categories(models.Model):
         ordering = ['title']
 
 
+class Color(models.Model):
+    title = models.CharField(max_length=20, verbose_name='name')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'цвет'
+        verbose_name_plural = 'цвета'
+        ordering = ['title']
+
+
 class Review(models.Model):
     product = models.ForeignKey('products', on_delete=models.PROTECT, verbose_name='product')
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
@@ -70,15 +82,3 @@ class Review(models.Model):
         verbose_name = 'отзыв'
         verbose_name_plural = 'отзывы'
         ordering = ['author']
-
-
-class Color(models.Model):
-    title = models.CharField(max_length=20, verbose_name='name')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'цвет'
-        verbose_name_plural = 'цвета'
-        ordering = ['title']
