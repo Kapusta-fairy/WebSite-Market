@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="row">
     <div class="col-md-12">
         <div class="row row-cols-md-3">
@@ -16,36 +15,45 @@
                 <h3>{{ product.name }}</h3>
                 <p>art: {{ product.article }}</p>
                 {% if product.discount %}
-                    <h5>Скидка!</h5><br>
-                    <h4>было {{ product.price }}{{ product.currency_char }}</h4>
-                    <h4>стало {{ product.discount }}{{ product.currency_char }}</h4>
+                <h5>Скидка!</h5><br>
+                <h6>было {{ product.price }}{{ product.currency_char }}</h6>
+                <h4>стало {{ product.discount }}{{ product.currency_char }}</h4>
                 {% else %}
-                    <h5>{{ product.price }}{{ product.currency_char }}</h5>
+                <h5>{{ product.price }}{{ product.currency_char }}</h5>
                 {% endif %}
                 <p>{{ product.description }}</p>
             </div>
             <div class="col">
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <th scope="row">Категория</th>
-                            <td>{{ product.category }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Цвет</th>
-                            <td>{{ product.color }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Всего продано</th>
-                            <td>{{ product.total_purchased }}</td>
-                        </tr>
+                    <tr>
+                        <th scope="row">Категория</th>
+                        <td>{{ product.category }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Цвет</th>
+                        <td>{{ product.color }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Всего продано</th>
+                        <td>{{ product.total_purchased }}</td>
+                    </tr>
                     </tbody>
                 </table>
+                {% if user.is_authenticated %}
+                <form id='review_form' action="{% url 'detail' product.slug %}" method="post">
+                    {% csrf_token %}
+                    {{ review_form.as_p }}
+                    <button type="submit" class="btn btn-light">Оставить отзыв</button>
+                </form>
+                {% else %}
+                Чтобы оставить отзыв необходимо авторизоваться
+                {% endif %}
             </div>
             <div>
-                <form action="{% url 'cart_add' product.id %}" method="post">
+                <form id='add_form' action="{% url 'cart_add' product.id %}" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ add_form.as_p }}
                     <button type="submit" class="btn btn-light">Добавить в корзину</button>
                 </form>
                 <a class="btn btn-light" href="{% url 'cart' %}" role="button">Перейти в корзину</a>
@@ -53,5 +61,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

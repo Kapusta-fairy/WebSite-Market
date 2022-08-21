@@ -25,8 +25,7 @@ class Cart(object):
             self.cart[product_id] = {'quantity': 0,
                                      'price': str(product.price),
                                      'product_id': product_id,
-                                     'slug': product.slug
-                                     }
+                                     'slug': product.slug}
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:

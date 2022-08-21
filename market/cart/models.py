@@ -41,5 +41,5 @@ class Payment(models.Model):
 
 
 class Sell(models.Model):
-    payment = models.ForeignKey('Payment', on_delete=models.PROTECT, verbose_name='payment')
-    delivery = models.ForeignKey('Delivery', on_delete=models.PROTECT, verbose_name='delivery')
+    payment = models.ForeignKey('Payment', on_delete=models.PROTECT, verbose_name='Оплата')
+    delivery = models.ForeignKey('Delivery', on_delete=models.PROTECT, verbose_name='Доставка')
