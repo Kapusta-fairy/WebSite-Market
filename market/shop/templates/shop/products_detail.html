@@ -43,6 +43,7 @@
                 {% if request.user.is_authenticated %}
                 <form id='review_form' action="{% url 'review_add' product.slug %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="userfromform" value="{{ user.id }}">
                     {{ review_form.as_p }}
                     <button type="submit" class="btn btn-light">Оставить отзыв</button>
                 </form>

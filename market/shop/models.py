@@ -68,7 +68,7 @@ class Color(models.Model):
 
 class Review(models.Model):
     product = models.ForeignKey('products', on_delete=models.PROTECT, verbose_name='product')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     text_content = models.CharField(max_length=20, verbose_name='Текст вашего отзыва')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created at')
 

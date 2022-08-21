@@ -11,14 +11,18 @@
     </div>
     <div class="col-md-9">
         <div class="row row-cols-md-3">
-            {% for item in object_list %}
+            {% for product in object_list %}
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <a href="{% url 'detail' item.slug %}">
-                        <img src="{{ item.photo.url }}" class="card-img-top" alt="" height="225"></a>
+                    <a href="{% url 'detail' product.slug %}">
+                        <img src="{{ product.photo.url }}" class="card-img-top" alt="" height="225"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <h5 class="card-title">{{ item.price }}{{ item.currency_char }}</h5>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        {% if product.discount %}
+                        <h5 class="card-title">Скидка! {{ product.discount }}{{ product.currency_char }}</h5>
+                        {% else %}
+                        <h5 class="card-title">{{ product.price }}{{ product.currency_char }}</h5>
+                        {% endif %}
                     </div>
                 </div>
             </div>
