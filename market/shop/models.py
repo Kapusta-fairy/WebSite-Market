@@ -76,9 +76,9 @@ class Review(models.Model):
         return f'{self.author}{self.product}'
 
     def get_absolute_url(self):
-        return reverse('course_review', kwargs={'product': self.product})
+        return reverse('reviews', kwargs={'slug': self.product.slug})
 
     class Meta:
         verbose_name = 'отзыв'
         verbose_name_plural = 'отзывы'
-        ordering = ['author']
+        ordering = ['-created_at']

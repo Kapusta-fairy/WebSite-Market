@@ -59,6 +59,17 @@
                 </form>
                 <a class="btn btn-light" href="{% url 'cart' %}" role="button">Перейти в корзину</a>
             </div>
+            {% if reviews %}
+            <div class="list-group">
+                {% for review in reviews %}
+                <a href="{% url 'reviews' product.slug %}" class="list-group-item">
+                    <h6>{{ review.author }}</h6>{{ review.text_content }}
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <h6>Кажется отзывов еще нет, вы можете стать первым!</h6>
+            {% endif %}
         </div>
     </div>
 </div>

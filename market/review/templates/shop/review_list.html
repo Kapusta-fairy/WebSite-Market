@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Отзывы к {{ reviews.product }}
+{% endblock %}
+
+{% block content %}
+<div class="list-group">
+    {% for review in reviews %}
+    <div class="list-group-item">
+        <h6>{{ review.author }}</h6>{{ review.text_content }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

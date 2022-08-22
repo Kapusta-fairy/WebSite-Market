@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from cart.forms import CartAddProductForm
 from review.forms import ReviewForm
-from shop.models import Products, Categories
+from shop.models import Products, Categories, Review
 
 
 class PromoteShop(ListView):
@@ -42,6 +42,7 @@ class CategoryShop(ListView):
 def product_detail(request, slug):
     product = get_object_or_404(Products, slug=slug)
     context = {'product': product,
+               'reviews': Review.objects.filter(product_id=product.id)[:3],
                'add_form': CartAddProductForm(),
                'review_form': ReviewForm(request.user, product)}
     return render(request, 'shop/products_detail.html', context)
