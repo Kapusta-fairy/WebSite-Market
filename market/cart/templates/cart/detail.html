@@ -9,20 +9,23 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    {% if cart %}
-        <table class="table">
-            <thead>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            {% if cart %}
+            <table class="table">
+                <thead>
                 <tr>
                     <th scope="col">Товар</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col">Кол-во</th>
                     <th scope="col">Цена</th>
                     <th scope="col">Итого</th>
                 </tr>
-            </thead>
-            <tbody>
-            {% for item in cart %}
+                </thead>
+                <tbody>
+                {% for item in cart %}
                 <tr>
                     <td>
                         <a href="{% url 'detail' item.slug %}">
@@ -31,28 +34,44 @@
                     </td>
                     <td>
                         {% get_product_name item %}
+                    </td>
+                    <td>
+
                         <a class="btn btn-light" href="{% url 'cart_remove' item.product_id %}">Удалить</a>
                     </td>
                     <td>
                         {{ item.quantity }}
                     </td>
-                    <td>{{ item.price }}{{ currency }}</td>
+                    <td>
+                        {% if item.discount %}
+                        {{ item.discount }}{{ currency }}
+                        {% else %}
+                        {{ item.price }}{{ currency }}
+                        {% endif %}
+                    </td>
                     <td>{{ item.total_price }}{{ currency }}</td>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{% url 'promout' %}" type="button" class="btn btn-light">Вернуться на главную</a>
-            <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <form action="{% url 'plug' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-light">Купить {{ total }}{{ currency }}</button>
-        </form>
-    {% else %}
-        <h5>Кажется тут пусто...</h5>
-    {% endif %}
+        <a href="{% url 'promout' %}" type="button" class="btn btn-light">Вернуться на главную</a>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <div>
+                <form action="{% url 'plug' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-light">Купить {{ total }}{{ currency }}</button>
+                    <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
+                </form>
+
+                {% else %}
+                <h5>Кажется тут пусто...</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

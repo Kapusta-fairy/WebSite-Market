@@ -9,13 +9,12 @@ from .models import Payment, Delivery, Politics
 
 @require_POST
 def cart_add(request, id):
-    cart = Cart(request)
     product = get_object_or_404(Products, id=id)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
-        cart.add_or_refresh(product=product, quantity=cd['quantity'], update_quantity=cd['update'])
-    return redirect('cart')
+        Cart(request).add_or_refresh(product=product, quantity=cd['quantity'], update_quantity=cd['update'])
+    return redirect('detail', product.slug)
 
 
 def cart_remove(request, id):
