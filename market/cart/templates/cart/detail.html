@@ -43,11 +43,7 @@
                         {{ item.quantity }}
                     </td>
                     <td>
-                        {% if item.discount %}
-                        {{ item.discount }}{{ currency }}
-                        {% else %}
-                        {{ item.price }}{{ currency }}
-                        {% endif %}
+                        {% get_product_price item %}{{ currency }}
                     </td>
                     <td>{{ item.total_price }}{{ currency }}</td>
                 </tr>

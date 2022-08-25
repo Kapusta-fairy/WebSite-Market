@@ -1,4 +1,7 @@
+from django.shortcuts import get_object_or_404
+
 from market import settings
+from shop.models import Products
 
 
 class Cart(object):
@@ -13,7 +16,12 @@ class Cart(object):
     def __iter__(self):
         for item in self.cart.values():
             item['price'] = float(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            product = get_object_or_404(Products, id=item['product_id'])
+            if product.discount:
+                price = (product.discount * item['quantity'])
+            else:
+                price = (product.price * item['quantity'])
+            item['total_price'] = price
             yield item
 
     def __len__(self):
@@ -43,7 +51,14 @@ class Cart(object):
             self.save()
 
     def get_total_price(self):
-        return sum(float(item['price']) * item['quantity'] for item in self.cart.values())
+        prices = []
+        for item in self.cart.values():
+            product = get_object_or_404(Products, id=item['product_id'])
+            if product.discount:
+                prices.append(product.discount * item['quantity'])
+            else:
+                prices.append(product.price * item['quantity'])
+        return sum(prices)
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

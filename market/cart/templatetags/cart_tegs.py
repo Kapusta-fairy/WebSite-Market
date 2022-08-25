@@ -16,5 +16,10 @@ def get_product_photo(item):
 
 
 @register.simple_tag()
-def get_product_discount(item):
-    return get_object_or_404(Products, id=item['product_id']).photo.discount
+def get_product_price(item):
+    product = get_object_or_404(Products, id=item['product_id'])
+    if product.discount:
+        price = product.discount
+    else:
+        price = product.price
+    return price
