@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView
-from shop.models import Products
+from shop.models import Products, Categories
 from .cart import Cart
 from .forms import SellForm, CartAddProductForm
 from .models import Payment, Delivery, Politics
@@ -31,10 +31,16 @@ def cart_detail(request):
                'title': 'корзина',
                'payment': Payment.objects.all(),
                'delivery': Delivery.objects.all(),
-               'form': SellForm
+               'form': SellForm,
+               'categories': Categories.objects.all()
                }
     return render(request, 'cart/detail.html', context)
 
 
 class PoliticCart(DetailView):
     model = Politics
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Categories.objects.all()
+        return context

@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
-
 from register.forms import UserRegisterForm, UserLoginForm
+from shop.models import Categories
 
 
 def user_logout(request):
@@ -21,7 +21,7 @@ def register(request):
             messages.error(request, 'Ошибка регистрации')
     else:
         form = UserRegisterForm()
-    return render(request, 'register/register.html', {'form': form})
+    return render(request, 'register/register.html', {'form': form, 'categories': Categories.objects.all()})
 
 
 def user_login(request):
@@ -33,4 +33,4 @@ def user_login(request):
             return redirect('promout')
     else:
         form = UserLoginForm()
-    return render(request, 'register/login.html', {'form': form})
+    return render(request, 'register/login.html', {'form': form, 'categories': Categories.objects.all()})

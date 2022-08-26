@@ -6,11 +6,9 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-3">
-        {% include 'inc/_categories.html' %}
-    </div>
-    <div class="col-md-9">
-        <div class="row row-cols-md-3">
+    <div class="col-md-12">
+        <div class="row row-cols-md-4">
+            {% if object_list %}
             {% for product in object_list %}
             <div class="col">
                 <div class="card" style="width: 18rem;">
@@ -27,6 +25,9 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h5>Похоже ничего не нашлось</h5>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -45,7 +45,8 @@ def product_detail(request, slug):
     context = {'product': product,
                'reviews': Review.objects.filter(product_id=product.id)[:3],
                'add_form': CartAddProductForm(),
-               'review_form': ReviewForm(request.user, product)}
+               'review_form': ReviewForm(request.user, product),
+               'categories': Categories.objects.all()}
     return render(request, 'shop/products_detail.html', context)
 
 

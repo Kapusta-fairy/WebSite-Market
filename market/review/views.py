@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import CreateView
 from review.forms import ReviewForm
-from shop.models import Review, Products
+from shop.models import Review, Products, Categories
 
 
 class CreateReview(CreateView):
@@ -24,5 +24,6 @@ class CreateReview(CreateView):
 def list_review(request, slug):
     product = get_object_or_404(Products, slug=slug)
     context = {'reviews': Review.objects.filter(product_id=product.id),
-               'product_name': product.name}
+               'product_name': product.name,
+               'categories': Categories.objects.all()}
     return render(request, 'shop/review_list.html', context)
