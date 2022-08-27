@@ -30,26 +30,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent2">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'cart' %}">Корзина</a>
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                        href="{% url 'cart' %}">Корзина</a>
                 </li>
             </ul>
         </div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <span class="navbar-text">
             {% if request.user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page">{{ user.username }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Выход </a>
-            </li>
+            <a href="{% url 'create' %}">Разместить свой товар</a>
+                {{ user.username }} | <a href="{% url 'logout' %}">Выход</a>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Регистрация </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Войти</a>
-            </li>
+            <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a>
             {% endif %}
-        </ul>
+        </span>
     </div>
 </nav>

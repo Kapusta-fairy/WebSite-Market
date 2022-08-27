@@ -7,6 +7,15 @@ from .forms import SellForm, CartAddProductForm
 from .models import Payment, Delivery, Politics
 
 
+class PoliticCart(DetailView):
+    model = Politics
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Categories.objects.all()
+        return context
+
+
 @require_POST
 def cart_add(request, id):
     product = get_object_or_404(Products, id=id)
@@ -35,12 +44,3 @@ def cart_detail(request):
                'categories': Categories.objects.all()
                }
     return render(request, 'cart/detail.html', context)
-
-
-class PoliticCart(DetailView):
-    model = Politics
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Categories.objects.all()
-        return context

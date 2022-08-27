@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from review.forms import ReviewForm
+from shop.forms import SaleForm
 from shop.models import Products, Categories, Review
 
 
@@ -50,15 +51,22 @@ def product_detail(request, slug):
     return render(request, 'shop/products_detail.html', context)
 
 
+class CreateProduct(CreateView):
+    form_class = SaleForm
+    template_name = 'shop/templates/shop/create_product.html'
+
+
 def pay_plug(request):
     cart = Cart(request)
     slugs = []
+    quantity = []
     for i in cart.cart:
         i = cart.cart[i]
+        quantity.append(i['quantity'])
         slugs.append(i['slug'])
-    for slug in slugs:
-        product = get_object_or_404(Products, slug=slug)
-        product.total_purchased += 1
+    for i in range(len(slugs)):
+        product = get_object_or_404(Products, slug=slugs[i])
+        product.total_purchased += quantity[i]
         product.save()
     cart.clear()
     return HttpResponse('а, ну тут типа форма оплаты от банка, вот')

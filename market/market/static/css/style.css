@@ -7,3 +7,12 @@
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
     color: rgb(245 245 245 / 90%);
 }
+.navbar-light .navbar-text {
+    color: rgb(255 255 255 / 90%);
+}
+.navbar-light .navbar-text a, .navbar-light .navbar-text a:focus, .navbar-light .navbar-text a:hover {
+    color: rgb(255 255 255);
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(255 255 255);
+}

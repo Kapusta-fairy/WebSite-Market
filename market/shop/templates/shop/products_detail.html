@@ -10,18 +10,36 @@
         <div class="row row-cols-md-3">
             <div class="col">
                 <img src="{{ product.photo.url }}" class="card-img-top" alt="" width="">
+                <div>
+                    <form id='add_form' action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        {{ add_form.as_p }}
+                        <button type="submit" class="btn btn-light">Добавить в корзину</button>
+                    </form>
+                    <a class="btn btn-light" href="{% url 'cart' %}" role="button">Перейти в корзину</a>
+                </div>
             </div>
-            <div>
+            <div class="col">
                 <h3>{{ product.name }}</h3>
                 <p>art: {{ product.article }}</p>
                 {% if product.discount %}
-                <h5>Скидка!</h5><br>
-                <h6>было {{ product.price }}{{ product.currency_char }}</h6>
-                <h4>стало {{ product.discount }}{{ product.currency_char }}</h4>
+                <h6><s>{{ product.price }}{{ product.currency_char }}</s></h6>
+                <h4>{{ product.discount }}{{ product.currency_char }}</h4>
                 {% else %}
                 <h5>{{ product.price }}{{ product.currency_char }}</h5>
                 {% endif %}
                 <p>{{ product.description }}</p>
+                {% if reviews %}
+                <div class="list-group">
+                    {% for review in reviews %}
+                    <a href="{% url 'reviews' product.slug %}" class="list-group-item">
+                        <h6>{{ review.author }}</h6>{{ review.text_content }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <h6>Кажется отзывов еще нет, вы можете стать первым!</h6>
+                {% endif %}
             </div>
             <div class="col">
                 <table class="table">
@@ -51,25 +69,6 @@
                 Чтобы оставить отзыв необходимо авторизоваться
                 {% endif %}
             </div>
-            <div>
-                <form id='add_form' action="{% url 'cart_add' product.id %}" method="post">
-                    {% csrf_token %}
-                    {{ add_form.as_p }}
-                    <button type="submit" class="btn btn-light">Добавить в корзину</button>
-                </form>
-                <a class="btn btn-light" href="{% url 'cart' %}" role="button">Перейти в корзину</a>
-            </div>
-            {% if reviews %}
-            <div class="list-group">
-                {% for review in reviews %}
-                <a href="{% url 'reviews' product.slug %}" class="list-group-item">
-                    <h6>{{ review.author }}</h6>{{ review.text_content }}
-                </a>
-                {% endfor %}
-            </div>
-            {% else %}
-            <h6>Кажется отзывов еще нет, вы можете стать первым!</h6>
-            {% endif %}
         </div>
     </div>
 </div>
