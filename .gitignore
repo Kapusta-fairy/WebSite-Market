@@ -1,2 +1,7 @@
-web_design
-private_settings.py
+.idea
+__pycache__/
+*.pyc
+/web_design
+market/static
+market/market/private_settings.py
+market/media

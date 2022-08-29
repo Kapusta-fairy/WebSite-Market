@@ -1,10 +1,12 @@
+from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, CreateView
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
+from market.settings import DISPLAYED_REVIEWS
 from review.forms import ReviewForm
-from shop.forms import SaleForm
+from shop.forms import ProductsForm
 from shop.models import Products, Categories, Review
 
 
@@ -44,16 +46,25 @@ class CategoryShop(ListView):
 def product_detail(request, slug):
     product = get_object_or_404(Products, slug=slug)
     context = {'product': product,
-               'reviews': Review.objects.filter(product_id=product.id)[:3],
+               'reviews': Review.objects.filter(product_id=product.id)[:DISPLAYED_REVIEWS],
                'add_form': CartAddProductForm(),
                'review_form': ReviewForm(request.user, product),
                'categories': Categories.objects.all()}
     return render(request, 'shop/products_detail.html', context)
 
 
-class CreateProduct(CreateView):
-    form_class = SaleForm
-    template_name = 'shop/templates/shop/create_product.html'
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Отчёт отправлен')
+            return redirect('promout')
+        else:
+            messages.error(request, 'Ошибка отправки отчёта')
+    else:
+        form = ProductsForm()
+    return render(request, 'shop/create_product.html', {'form': form})
 
 
 def pay_plug(request):

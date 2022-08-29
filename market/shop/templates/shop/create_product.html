@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<form id='review_form' action="{% url 'review_add' product.slug %}" method="post">
-    {% csrf_token %}
-    {{ review_form.as_p }}
-    <button type="submit" class="btn btn-light">Добавить</button>
-</form>
+<div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-light">Добавить</button>
+    </form>
+</div>
 {% endblock %}
