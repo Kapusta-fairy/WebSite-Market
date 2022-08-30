@@ -5,7 +5,8 @@ from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from market.settings import DISPLAYED_REVIEWS
 from review.forms import ReviewForm
-from shop.models import Products, Categories, Review
+from review.models import Review
+from shop.models import Products, Categories
 
 
 class PromoteShop(ListView):

@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import CreateView
 from review.forms import ReviewForm
-from shop.models import Review, Products, Categories
+from review.models import Review
+from shop.models import Products, Categories
 
 
 class CreateReview(CreateView):
