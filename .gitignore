@@ -2,6 +2,5 @@
 __pycache__/
 *.pyc
 /web_design
-market/static
 market/market/private_settings.py
-market/media
+market/media/products
