@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'register.apps.RegisterConfig',
     'review.apps.ReviewConfig',
+    'user_products.apps.UserProductsConfig',
 ]
 
 MIDDLEWARE = [

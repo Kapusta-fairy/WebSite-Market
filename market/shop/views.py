@@ -1,12 +1,10 @@
-from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect
-from django.views.generic import ListView, CreateView
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from market.settings import DISPLAYED_REVIEWS
 from review.forms import ReviewForm
-from shop.forms import ProductsForm
 from shop.models import Products, Categories, Review
 
 
@@ -51,20 +49,6 @@ def product_detail(request, slug):
                'review_form': ReviewForm(request.user, product),
                'categories': Categories.objects.all()}
     return render(request, 'shop/products_detail.html', context)
-
-
-def create_product(request):
-    if request.method == 'POST':
-        form = ProductsForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Отчёт отправлен')
-            return redirect('promout')
-        else:
-            messages.error(request, 'Ошибка отправки отчёта')
-    else:
-        form = ProductsForm()
-    return render(request, 'shop/create_product.html', {'form': form})
 
 
 def pay_plug(request):

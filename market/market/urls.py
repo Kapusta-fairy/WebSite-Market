@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('review.urls')),
     path('', include('register.urls')),
     path('', include('shop.urls')),
+    path('', include('user_products.urls')),
 ]
 
 if settings.DEBUG:
