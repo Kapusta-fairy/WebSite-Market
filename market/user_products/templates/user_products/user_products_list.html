@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ Title }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="col">
+            <a class="btn btn-success" href="{% url 'create' %}" role="button">Добавить</a>
+        </div>
+        <div class="row row-cols-md-4">
+            {% if object_list %}
+            {% for product in object_list %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <a href="{% url 'detail' product.slug %}">
+                        <img src="{{ product.photo.url }}" class="card-img-top" alt="" height="225"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        {% if product.discount %}
+                        <h5 class="card-title">Скидка! {{ product.discount }}{{ product.currency_char }}</h5>
+                        {% else %}
+                        <h5 class="card-title">{{ product.price }}{{ product.currency_char }}</h5>
+                        {% endif %}
+                        <!--                        <a href="{% url 'product_edit' product.slug %}" class="btn btn-success">Редактировать</a>-->
+                        <a href="{% url 'product_remove' product.id %}" class="btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5>Кажется вы пока что не создали ни одного товара</h5>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,10 +3,8 @@ from .models import Products, Categories, Color, Currency
 
 
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ('article', 'name', 'total_purchased')
-    list_display_links = ('article',)
-    prepopulated_fields = {'slug': ('name',), 'article': ('color', 'category', 'currency_char')}
-    search_fields = ('article', 'name')
+    list_display = ('name', 'total_purchased')
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class CategoriesAdmin(admin.ModelAdmin):

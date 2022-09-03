@@ -19,26 +19,35 @@
 
     {% if messages %}
 
-        {% for message in messages %}
+    {% for message in messages %}
 
-        {% if message.tags == 'error' %}
-        <div class="alert alert-danger" role="alert">
-            {{ message }}
-        </div>
-        {% else %}
-        <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
-        </div>
-        {% endif %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% else %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
 
-        {% endfor %}
+    {% endfor %}
 
     {% endif %}
 
     {% block content %}
     CONTENT
     {% endblock %}
-
+    <div style="text-align: center; color: #666; font-size: 16px;">
+        <a style="color: #999;" href="{% url 'promout' %}">Главная</a>
+        |
+        <a style="color: #999;" href="{% url 'politics' 1 %}">Правила суса</a>
+        |
+        <a style="color: #999;" href="https://vk.com/kapystageniy">Капуста</a>
+        <br/><br/>
+        &copy; 2022 KapustaIndustries <br/>
+        Все права защищены
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
