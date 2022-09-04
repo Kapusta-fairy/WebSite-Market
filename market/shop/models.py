@@ -13,7 +13,6 @@ class Products(models.Model):
     category = models.ForeignKey('Categories', on_delete=models.PROTECT, verbose_name='Категория')
     price = models.IntegerField(verbose_name='Цена')
     discount = models.IntegerField(verbose_name='Скидка', blank=True, null=True)
-    currency_char = models.ForeignKey('Currency', on_delete=models.PROTECT, verbose_name='Валюта')
     contacts = models.CharField(max_length=40, verbose_name='Контакты')
     total_purchased = models.IntegerField(verbose_name='Всего куплено', default=0)
 

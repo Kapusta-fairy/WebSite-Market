@@ -22,10 +22,10 @@
             <div class="col">
                 <h3>{{ product.name }}</h3>
                 {% if product.discount %}
-                <h6><s>{{ product.price }}{{ product.currency_char }}</s></h6>
-                <h4>{{ product.discount }}{{ product.currency_char }}</h4>
+                <h6><s>{{ product.price }}₽</s></h6>
+                <h4>{{ product.discount }}₽</h4>
                 {% else %}
-                <h5>{{ product.price }}{{ product.currency_char }}</h5>
+                <h5>{{ product.price }}₽</h5>
                 {% endif %}
                 <p>{{ product.description }}</p>
                 {% if reviews %}

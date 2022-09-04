@@ -11,23 +11,29 @@
             {% if object_list %}
             {% for product in object_list %}
             <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <a href="{% url 'detail' product.slug %}">
-                        <img src="{{ product.photo.url }}" class="card-img-top" alt="" height="225"></a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        {% if product.discount %}
-                        <h5 class="card-title">Скидка! {{ product.discount }}{{ product.currency_char }}</h5>
-                        {% else %}
-                        <h5 class="card-title">{{ product.price }}{{ product.currency_char }}</h5>
+                {% if product.discount %}
+                <div class="card border-warning mb-3" style="max-width: 18rem;">
+                    {% else %}
+                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
                         {% endif %}
+                        <a href="{% url 'detail' product.slug %}">
+                            <img src="{{ product.photo.url }}" class="card-img-top" alt="" height="225">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            {% if product.discount %}
+                            <h5>{{ product.discount }}₽</h5>
+                            {% else %}
+                            <h5>{{ product.price }}₽</h5>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
+                {% else %}
+                <h5>Похоже ничего не нашлось</h5>
+                {% endif %}
             </div>
-            {% endfor %}
-            {% else %}
-            <h5>Похоже ничего не нашлось</h5>
-            {% endif %}
         </div>
     </div>
 </div>

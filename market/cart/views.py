@@ -36,8 +36,7 @@ def cart_remove(request, id):
 def cart_detail(request):
     context = {'cart': Cart(request),
                'total': Cart(request).get_total_price(),
-               'currency': '₽',
-               'title': 'корзина',
+               'title': 'Корзина',
                'payment': Payment.objects.all(),
                'delivery': Delivery.objects.all(),
                'form': SellForm,

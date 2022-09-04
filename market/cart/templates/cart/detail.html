@@ -43,9 +43,9 @@
                         {{ item.quantity }}
                     </td>
                     <td>
-                        {% get_product_price item %}{{ currency }}
+                        {% get_product_price item %}₽
                     </td>
-                    <td>{{ item.total_price }}{{ currency }}</td>
+                    <td>{{ item.total_price }}₽</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -59,10 +59,9 @@
                 <form action="{% url 'plug' %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-light">Купить {{ total }}{{ currency }}</button>
+                    <button type="submit" class="btn btn-light">Купить {{ total }}₽</button>
                     <a href="{% url 'politics' 1 %}" type="button" class="btn btn-light">Политика конфиденциальности</a>
                 </form>
-
                 {% else %}
                 <h5>Кажется тут пусто...</h5>
                 {% endif %}
