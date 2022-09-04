@@ -6,7 +6,8 @@ from shop.models import Products
 class ProductsForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ['name', 'slug', 'photo', 'description', 'color', 'category', 'currency_char', 'price', 'discount']
+        fields = ['name', 'slug', 'photo', 'description', 'color', 'category', 'currency_char', 'price', 'discount',
+                  'contacts']
         help_texts = {'slug': 'Эта надпись будет в ссылке на страницу товара'}
         widgets = {'name': forms.TextInput(attrs={'class': 'form-control'}),
                    'slug': forms.TextInput(attrs={'class': 'form-control'}),
@@ -16,7 +17,8 @@ class ProductsForm(forms.ModelForm):
                    'price': forms.TextInput(attrs={'class': 'form-control'}),
                    'discount': forms.TextInput(attrs={'class': 'form-control'}),
                    'currency_char': forms.Select(attrs={'class': 'form-control'}),
-                   'photo': forms.FileInput(attrs={'class': 'form-control'})
+                   'photo': forms.FileInput(attrs={'class': 'form-control'}),
+                   'contacts': forms.TextInput(attrs={'class': 'form-control'})
                    }
 
     def __init__(self, user, *args, **kwargs):

@@ -1,5 +1,5 @@
-from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import CreateView, ListView
+from django.shortcuts import redirect
+from django.views.generic import CreateView, ListView, UpdateView
 from shop.models import Products, Categories
 from user_products.forms import ProductsForm
 
@@ -33,9 +33,12 @@ class ShowUserProducts(ListView):
         return context
 
 
-class EditUserProducts(CreateView):
+class EditUserProducts(UpdateView):
     form_class = ProductsForm
     template_name = 'user_products/products_form.html'
+
+    def get_queryset(self):
+        return Products.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
