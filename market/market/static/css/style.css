@@ -16,3 +16,7 @@
 .navbar-light .navbar-nav .nav-link {
     color: rgb(255 255 255);
 }
+
+.errorlist{
+    color: red;
+}

@@ -28,18 +28,6 @@ class Products(models.Model):
         ordering = ['name']
 
 
-class Currency(models.Model):
-    char = models.CharField(max_length=1, verbose_name='currency char')
-
-    def __str__(self):
-        return self.char
-
-    class Meta:
-        verbose_name = 'валюта'
-        verbose_name_plural = 'валюты'
-        ordering = ['char']
-
-
 class Categories(models.Model):
     objects = None
     title = models.CharField(max_length=20, verbose_name='title')
