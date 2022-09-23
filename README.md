@@ -25,14 +25,14 @@
 
 Перейдя перед этим в директорию с файлом manage.py(WebSite-Market/market/)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_1.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_1.png)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_2.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_2.png)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_3.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_3.png)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_4.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_4.png)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_5.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_5.png)
 
-![alt text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_6.png)
+![Image  text](https://github.com/Kapusta-fairy/WebSite-Market/tree/main/market/media/scr/Screenshot_6.png)
