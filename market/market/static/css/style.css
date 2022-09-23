@@ -2,7 +2,7 @@
     color: rgb(255 255 255 / 100%);
 }
 .navbar-light .navbar-brand {
-    color: rgb(255 255 255 / 100%);
+    color: rgb(255 255 255);
 }
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
     color: rgb(245 245 245 / 90%);
